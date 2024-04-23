@@ -3,7 +3,6 @@ import ReactModal from "react-modal"
 import Auth from "../components/Auth"
 import { useState } from "react"
 
-
 function Home(){
     const [modal, setModal]= useState(false)
     const openModal = () => {
@@ -14,12 +13,7 @@ function Home(){
     }
     return (
         <div>
-            <button onClick={openModal} >S'inscrire'</button>
-            <ReactModal isOpen={modal} onRequestClose={closeModal}>
-                <button onClick={closeModal}>Close</button>
-                <Auth closeModal={closeModal}/>
-            </ReactModal>
-            <button onClick={openModal} >Se connecter</button>
+            <button onClick={openModal} >Se connecter | S'inscrire</button>
             <ReactModal isOpen={modal} onRequestClose={closeModal}>
                 <button onClick={closeModal}>Close</button>
                 <Auth closeModal={closeModal}/>

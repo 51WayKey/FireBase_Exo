@@ -10,7 +10,7 @@ export const routes = createBrowserRouter([
     {
         path: "/account",
         element: <Account />,
-    },
+    }
     ]);
 
 export default routes
