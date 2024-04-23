@@ -4,14 +4,17 @@ import Auth from "../components/Auth"
 import { useState } from "react"
 
 
+
 function Home(){
-    const [modal, setModal]= useState(false)
+    const [modal, setModal]= useState(false);
+
     const openModal = () => {
         setModal(true)
     }
     const closeModal = () => {
         setModal(false)
     }
+
     return (
         <div>
             <button onClick={openModal} >S'inscrire'</button>
@@ -30,4 +33,3 @@ function Home(){
 }
 
 export default Home
-
