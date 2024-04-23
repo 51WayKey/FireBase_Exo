@@ -5,33 +5,30 @@ import { FacebookAuthProvider, signInWithPopup, GoogleAuthProvider, TwitterAuthP
 import { authentification, db } from "../firebase/firebase";
 import { setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-// import { collection } from "firebase/firestore";
 
 
 function Auth ( {closeModal} ) {
     const navigate = useNavigate();
-
-    const handleLoginSuccess = (user) => {
-        const {displayName, email, uid } = user
-        console.log(user);
-        const userRef = doc(db, 'users', uid);
-        const userData = {displayName, email}
+    const handleLoginSuccess = (user)=> {
+        const { uid, displayName, email } = user;
+        const userRef = doc(db, 'users', uid)
+        const userData = { displayName, email }
         setDoc(userRef, userData)
-        .then((UserCredentialImpl)=> {
-            console.log("Info Users :", UserCredentialImpl )
-            closeModal();
-            navigate('/account')
-        })
-        .catch((err) =>{
-         console.log(err.message)})
-        
-   
-
+            .then(() => {
+                console.log("user enregistré dans Firestore");
+                closeModal();
+                navigate('/account');
+            })
+            .catch((err) => {
+                console.log(err.message)
+            });
+    }
 
     const handleLoginFacebook = ()=> {
         const providerfb = new FacebookAuthProvider();
         signInWithPopup(authentification, providerfb)
         .then((UserCredentialImpl)=> {
+            console.log("Info Users :", UserCredentialImpl )
             handleLoginSuccess(UserCredentialImpl.user)
         })
         .catch((err) =>{
@@ -43,9 +40,8 @@ function Auth ( {closeModal} ) {
         const providerX = new TwitterAuthProvider();
         signInWithPopup(authentification, providerX)
         .then((UserCredentialImpl)=> {
+            console.log("Info Users :", UserCredentialImpl )
             handleLoginSuccess(UserCredentialImpl.user)
-            
-
         })
         .catch((err) =>{
          console.log(err.message)})
@@ -56,14 +52,14 @@ function Auth ( {closeModal} ) {
         const providerGoogle = new GoogleAuthProvider();
         signInWithPopup(authentification, providerGoogle)
         .then((UserCredentialImpl)=> {
+            console.log("Info Users :", UserCredentialImpl )
             handleLoginSuccess(UserCredentialImpl.user)
-
         })
         .catch((err) =>{
          console.log(err.message)})
 
     }
-    
+
 
     return (
         <div>
@@ -78,12 +74,3 @@ function Auth ( {closeModal} ) {
 }
 
 export default Auth;
-
-
-
-
-
-
-
-
-
