@@ -10,20 +10,29 @@ import { useNavigate } from "react-router-dom";
 
 function Auth ( {closeModal} ) {
     const navigate = useNavigate();
-    // const userRef = doc(db, 'users');
-    // const userData = 
-    // async function createDocument () {
-       
-    // }
+
+    const handleLoginSuccess = (user) => {
+        const {displayName, email, uid } = user
+        console.log(user);
+        const userRef = doc(db, 'users', uid);
+        const userData = {displayName, email}
+        setDoc(userRef, userData)
+        .then((UserCredentialImpl)=> {
+            console.log("Info Users :", UserCredentialImpl )
+            closeModal();
+            navigate('/account')
+        })
+        .catch((err) =>{
+         console.log(err.message)})
+        
+   
 
 
     const handleLoginFacebook = ()=> {
         const providerfb = new FacebookAuthProvider();
         signInWithPopup(authentification, providerfb)
-        .then((re)=> {
-            console.log("Info Users :", re )
-            closeModal();
-            navigate('/account')
+        .then((UserCredentialImpl)=> {
+            handleLoginSuccess(UserCredentialImpl.user)
         })
         .catch((err) =>{
          console.log(err.message)})
@@ -33,10 +42,9 @@ function Auth ( {closeModal} ) {
     const handleLoginTwitter = ()=> {
         const providerX = new TwitterAuthProvider();
         signInWithPopup(authentification, providerX)
-        .then((re)=> {
-            console.log("Info Users :", re )
-            closeModal();
-            navigate('/account')
+        .then((UserCredentialImpl)=> {
+            handleLoginSuccess(UserCredentialImpl.user)
+            
 
         })
         .catch((err) =>{
@@ -47,10 +55,8 @@ function Auth ( {closeModal} ) {
     const handleLoginGoogle = ()=> {
         const providerGoogle = new GoogleAuthProvider();
         signInWithPopup(authentification, providerGoogle)
-        .then((re)=> {
-            console.log("Info Users :", re )
-            closeModal();
-            navigate('/account')
+        .then((UserCredentialImpl)=> {
+            handleLoginSuccess(UserCredentialImpl.user)
 
         })
         .catch((err) =>{
