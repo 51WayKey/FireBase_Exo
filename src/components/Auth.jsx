@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 function Auth ( {closeModal} ) {
     const navigate = useNavigate();
     // const userRef = doc(db, 'users');
-    // const userData = 
+    // const userData = {displayName, email, uid }
     // async function createDocument () {
        
     // }
