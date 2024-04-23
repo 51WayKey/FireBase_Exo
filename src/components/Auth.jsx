@@ -23,7 +23,6 @@ function Auth ( {closeModal} ) {
             .catch((err) => {
                 console.log(err.message)
             });
-
     }
 
     const handleLoginFacebook = ()=> {

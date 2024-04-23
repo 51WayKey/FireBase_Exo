@@ -14,7 +14,12 @@ function Home(){
     }
     return (
         <div>
-            <button onClick={openModal} >Se Connecter</button>
+            <button onClick={openModal} >S'inscrire'</button>
+            <ReactModal isOpen={modal} onRequestClose={closeModal}>
+                <button onClick={closeModal}>Close</button>
+                <Auth closeModal={closeModal}/>
+            </ReactModal>
+            <button onClick={openModal} >Se connecter</button>
             <ReactModal isOpen={modal} onRequestClose={closeModal}>
                 <button onClick={closeModal}>Close</button>
                 <Auth closeModal={closeModal}/>
